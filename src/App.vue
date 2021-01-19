@@ -1,13 +1,15 @@
 <template>
   <v-app :style="themeStyle">
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app :color="currentPart" dark>
       <div class="d-flex align-center">
-        ThomasKenyeres
+        <router-link to="/">ThomasKenyeres</router-link>
+        <h1 v-if="currentPart !== 'primary'">
+          / {{ currentPart.toUpperCase() }}
+        </h1>
       </div>
 
       <v-spacer></v-spacer>
 
-      
       github.io
     </v-app-bar>
 
@@ -26,14 +28,38 @@ export default {
     theme() {
       return this.$vuetify.theme.dark ? "dark" : "light";
     },
+    currentPart() {
+      switch (this.$route.path) {
+        case "/dev":
+          return "dev";
+        case "/music":
+          return "music";
+        case "/demo":
+          return "demo";
+        default:
+          return "primary";
+      }
+    },
   },
   data() {
     return {
       themeStyle: {
-        background: this.$vuetify.theme.themes[this.$vuetify.theme.dark ? "dark": "light"].background,
+        background: this.$vuetify.theme.themes[
+          this.$vuetify.theme.dark ? "dark" : "light"
+        ].background,
       },
     };
   },
 };
 </script>
 
+<style scoped>
+.v-app-bar div div a {
+  color: white;
+  text-decoration: none;
+}
+
+.v-app-bar div h1 {
+  margin: 20px;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    This is also under construction
+    This page is under construction
     :)
   </div>
 </template>
